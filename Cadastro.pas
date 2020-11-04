@@ -40,7 +40,9 @@ type
     SpeedButton1: TSpeedButton;
     EditTel: TEdit;
     Memo1: TMemo;
+    SpeedButton2: TSpeedButton;
     procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -82,10 +84,22 @@ begin
   else
   Pessoa.Ativa:= False;
 
-
   JSONPessoa := TJson.ObjectToJsonObject(Pessoa);
 
   Memo1.Lines.Text := JSONPessoa.Format;
+end;
+
+procedure TForm2.SpeedButton2Click(Sender: TObject);
+var Arquivo: TStringList;
+begin
+  Arquivo := TStringList.Create;
+  try
+    Arquivo.Add(Memo1.Lines.Text);
+    Arquivo.SaveToFile('F:\Users\Otávio\Documents\Delphi\APS 8\Arquivo.json');
+    MessageDlg('Arquivo foi salvo na pasta!',mtInformation,[mbOK],0);
+  finally
+    Arquivo.Free;
+  end;
 end;
 
 end.
